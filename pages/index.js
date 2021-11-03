@@ -9,7 +9,10 @@ import {
   Card,
 } from "react-bootstrap";
 
-import MyNavbar from "../components/my-navbar";
+import MyNavbar from "components/my-navbar";
+import Intro from "components/intro";
+import ListItem from "components/list-item";
+import GridItem from "components/grid-item";
 
 export default function Home() {
   return (
@@ -17,20 +20,42 @@ export default function Home() {
       <MyNavbar />
       <div className="blog-detail-page">
         <Row>
-          <Col md="12">{/* <Intro /> */}</Col>
+          <Col md="12">
+            <Intro />
+          </Col>
         </Row>
 
         <hr />
 
         <div className={`page-wrapper`}>
           <Row className="mb-5">
-            <Col md="10">{/* <ListItem /> */}</Col>
+            <Col md="10">
+              <ListItem />
+            </Col>
 
-            <Col md="4">{/* <GridItem /> */}</Col>
+            <Col md="4">
+              <GridItem />
+            </Col>
 
-            <Col md="4">{/* <GridItem /> */}</Col>
+            <Col md="4">
+              <GridItem />
+            </Col>
 
-            <Col md="4">{/* <GridItem /> */}</Col>
+            <Col md="4">
+              <GridItem />
+            </Col>
+
+            <Col md="4">
+              <GridItem />
+            </Col>
+
+            <Col md="4">
+              <GridItem />
+            </Col>
+
+            <Col md="4">
+              <GridItem />
+            </Col>
           </Row>
         </div>
       </div>
