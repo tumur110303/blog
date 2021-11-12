@@ -1,6 +1,18 @@
 import { Row, Col } from "react-bootstrap";
 import Layout from "components/layout";
 import { getPostBySlug, getAllPosts } from "lib/api";
+import BlockContent from "@sanity/block-content-to-react";
+import HighLightCode from "components/HighLightCode";
+
+const serializers = {
+  types: {
+    code: (props) => (
+      <HighLightCode language={props.node.language}>
+        {props.node.code}
+      </HighLightCode>
+    ),
+  },
+};
 
 export default ({ post }) => {
   return (
@@ -30,18 +42,11 @@ export default ({ post }) => {
             <img className="img-fluid rounded" src={post.image} alt="" />
           </div>
           <br />
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus
-          praesentium molestias accusamus accusantium asperiores, distinctio
-          laborum, laudantium soluta illum aperiam nihil quam molestiae in enim
-          amet omnis architecto. Quo laboriosam debitis molestias placeat
-          maiores iste fuga ipsam consequatur temporibus non perferendis sequi,
-          praesentium numquam rerum voluptate quisquam ratione officia dolore ut
-          voluptates quos libero voluptatibus. Itaque molestias rem fugiat
-          minima quis assumenda, praesentium nostrum dolores enim esse est
-          possimus dolorum eius. Non aperiam expedita nisi facilis laborum,
-          repellendus voluptates sunt, quasi ratione modi maiores quae
-          temporibus obcaecati beatae officia molestias quam adipisci ea dolore
-          illum animi, aut earum. Iste, inventore.
+          <BlockContent
+            blocks={post.content}
+            serializers={serializers}
+            imageOptions={{ w: 320, h: 240, fit: "max" }}
+          />
         </Col>
       </Row>
     </Layout>
