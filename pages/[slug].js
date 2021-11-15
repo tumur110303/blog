@@ -1,6 +1,6 @@
 import { Row, Col } from "react-bootstrap";
 import Layout from "components/layout";
-import { getPostBySlug, getAllPosts } from "lib/api";
+import { getPostBySlug, getAllPosts, urlFor } from "lib/api";
 import BlockContent from "@sanity/block-content-to-react";
 import HighLightCode from "components/HighLightCode";
 
@@ -9,7 +9,16 @@ const serializers = {
     code: (props) => (
       <HighLightCode language={props.node.language}>
         {props.node.code}
+        <div className="code-filename">{props.node.filename}</div>
       </HighLightCode>
+    ),
+    image: (props) => (
+      <div className={`blog-image blog-image-${props.node.position}`}>
+        <img src={urlFor(props.node).height(400).url()} />
+        <div className="code-filename" style={{ textAlign: "center" }}>
+          {props.node.alt}
+        </div>
+      </div>
     ),
   },
 };
@@ -19,7 +28,7 @@ export default ({ post }) => {
     <Layout>
       <Row>
         <Col md="12">
-          <pre>{JSON.stringify(post, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
           <div className="blog-detail-header">
             <p className="leab mb-0">
               <img
@@ -39,7 +48,14 @@ export default ({ post }) => {
               {post.subtitle}
             </h2>
 
-            <img className="img-fluid rounded" src={post.image} alt="" />
+            <img
+              className="img-fluid rounded"
+              src={urlFor(post.cover_image).height(600).url()}
+              alt={post.cover_image.alt}
+            />
+            <div className="code-filename" style={{ textAlign: "center" }}>
+              {post.cover_image.alt}
+            </div>
           </div>
           <br />
           <BlockContent
